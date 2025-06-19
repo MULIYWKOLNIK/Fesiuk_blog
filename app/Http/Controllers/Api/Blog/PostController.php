@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Blog;
+namespace App\Http\Controllers\Api\Blog;
 
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
@@ -10,13 +10,18 @@ class PostController extends BaseController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    /*public function index()
     {
         $items = BlogPost::all();
         return view('blog.posts.index', compact('items'));
+    }*/
+
+    public function index()
+    {
+        $posts = BlogPost::with(['user', 'category'])->get();
+
+        return $posts;
     }
-
-
     /**
      * Show the form for creating a new resource.
      */
